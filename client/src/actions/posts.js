@@ -21,3 +21,12 @@ export const createPost = (post) => async(dispatch) => {
         console.log(error);
     }
 }
+
+export const updatePost = (id, post) => async (dispatch) => {
+    try {
+        // api.updatePost returns the updated Post component, { } destructures (unpacks) the response
+        const { data } = await api.updatePost(id, post);
+    } catch (error) {
+
+    }
+}

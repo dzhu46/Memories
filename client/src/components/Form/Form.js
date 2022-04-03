@@ -4,10 +4,11 @@ import FileBase from 'react-file-base64';
 import { useDispatch } from 'react-redux';
 
 import useStyles from './styles';
-import { createPost } from "../../actions/posts.js";
+import { createPost, updatePost } from "../../actions/posts.js";
 
+// GET THE CURRENT ID
 
-const Form = () => {
+const Form = ({ currentId, setCurrentId }) => {
     const [postData, setPostData] = useState({
         creator: '', title: '', message: '', tags: '', selectedFile: ''
     });
@@ -18,8 +19,16 @@ const Form = () => {
         // prevents browser refresh
         e.preventDefault();
 
-        // pass in all data from state store
-        dispatch(createPost(postData));
+        // if the current id exists, update post instead of creating
+        if(currentId) {
+            dispatch(updatePost(currentId, postData));
+        } else {
+            // pass in all data from state store
+            dispatch(createPost(postData));
+        }
+
+        
+        
     }
 
     const clear = () => {
